@@ -9,9 +9,7 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-const midLinks = [
-  { title: "counter", path: "/counter" },
-];
+const midLinks = [{ title: "counter", path: "/counter" }];
 
 const navStyles = {
   color: "inherit",
