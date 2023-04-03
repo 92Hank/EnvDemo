@@ -29,11 +29,27 @@ jobs:
 
       - name: 'Create env file'
         run: |
-          touch .env
-          echo REACT_APP_API_KEY=test >> .env
+          touch .env.test
+          echo REACT_APP_API_KEY=test >> .env.test
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Create and populate .Renviron file
+        env:
+          REACT_APP_GREETING: Hello
+          REACT_APP_VERSION: v1.1.1
+          REACT_APP_RELEASE_VERSION: ${GITHUB_REF#refs/tags/*/} >> $GITHUB_ENV
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          touch .env
+          echo $REACT_APP_GREETING >> .env
+          echo $REACT_APP_VERSION >> .env
+          echo $REACT_APP_RELEASE_VERSION >> .env
+
+          echo "cat .env"
+          cat .env
+
+          echo "ls -a ."
+          ls -a .
+
+          echo "ls -a ${{ github.workspace }}"
+          ls -a ${{ github.workspace }}
+        shell: bash
