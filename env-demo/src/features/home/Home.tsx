@@ -18,12 +18,14 @@ export default function Home() {
   console.log("Hash: " + gitInfo.commit.hash);
   console.log("Commit message: " + gitInfo.commit.message);
   console.log("shortHash: " + gitInfo.commit.shortHash);
+
+  const githubTag = process.env.NODE_ENV === "development" ? gitTagInfo.gitTag + " - " + gitTagInfo.gitTagWithDate : gitTagInfo.gitTag;
   return (
-    <Container sx={{flex: 1, flexDirection: "column", justifyContent: "center"}}>
-      <Typography variant="h2">Home Page 2</Typography>
-      <Typography variant="h2">
-        {gitTagInfo.gitTag}
-      </Typography>
+    <Container
+      sx={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
+    >
+      <Typography variant="h2">Home Page 22</Typography>
+      <Typography variant="h4">{githubTag.slice(0, -6)}</Typography>
     </Container>
   );
 }

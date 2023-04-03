@@ -23,6 +23,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+        with:
+          cache: npm
       
       - name: run git-info
         run: npm run git-info

@@ -14,8 +14,8 @@ const execSyncWrapper = (command: any) => {
 }
 
 const main = () => {
-  let gitTag = execSyncWrapper("git describe --tags");
-  let gitTagWithDate = execSyncWrapper("git log -1 --format=%ai");
+  let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
+  var gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
   // let gitTag = execSyncWrapper("git tag --sort=v:refname");
   // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
 
