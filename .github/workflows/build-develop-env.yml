@@ -27,9 +27,11 @@ jobs:
           cache: npm
       
       - name: run git-info
+        with:
+         node-version: ${{ matrix.node-version }}
         working-directory: env-demo
         run: |
-          npm install
+          npm ci
           npm run git-info
 
       # Runs a single command using the runners shell
