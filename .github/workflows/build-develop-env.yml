@@ -27,6 +27,7 @@ jobs:
           cache: npm
       
       - name: run git-info
+        working-directory: env-demo
         run: npm run git-info
 
       # Runs a single command using the runners shell
