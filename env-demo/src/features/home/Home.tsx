@@ -1,6 +1,7 @@
 import { Container, Typography } from "@mui/material";
 import GitInfo from "react-git-info/macro";
 import { execSyncWrapper } from "./test";
+import gitTagInfo from "../../gitTagInfo.json";
 
 export default function Home() {
   // let gitTag = "git tag --sort=v:refname | Select-Object -Last 1";
@@ -19,13 +20,9 @@ export default function Home() {
   console.log("shortHash: " + gitInfo.commit.shortHash);
   return (
     <Container sx={{flex: 1, flexDirection: "column", justifyContent: "center"}}>
+      <Typography variant="h2">Home Page</Typography>
       <Typography variant="h2">
-        {gitInfo.branch
-          ? gitInfo.branch + " " + gitInfo.tags
-          : "Home Page"}
-      </Typography>
-      <Typography variant="h4">
-          {gitInfo.tags}
+        {gitTagInfo.gitTag}
       </Typography>
     </Container>
   );

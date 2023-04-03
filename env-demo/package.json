@@ -29,7 +29,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "git-info": "node src/gitInfo.js",
+    "git-info": "ts-node src/gitInfo.ts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { execSync, exec } from 'child_process';
+import { execSync } from 'child_process';
 
 
-const execSyncWrapper = (command) => {
+const execSyncWrapper = (command: any) => {
   let output = null;
   try {
     output = execSync(command).toString().trim().split(/\r?\n/);
@@ -14,12 +14,14 @@ const execSyncWrapper = (command) => {
 }
 
 const main = () => {
-  let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
+  let gitTag = execSyncWrapper("git describe --tags");
+  let gitTagWithDate = execSyncWrapper("git log -1 --format=%ai");
   // let gitTag = execSyncWrapper("git tag --sort=v:refname");
   // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
 
   const obj = {
     gitTag,
+    gitTagWithDate
   };
 
   const filePath = path.resolve('src', 'gitTagInfo.json');

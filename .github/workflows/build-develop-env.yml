@@ -24,7 +24,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       
-      - run: npm git-info
+      - name: run git-info
+        run: npm git-info
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
