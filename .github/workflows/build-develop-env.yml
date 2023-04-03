@@ -33,11 +33,11 @@ jobs:
           echo REACT_APP_API_KEY=test >> .env.test
 
       # Runs a set of commands using the runners shell
-      - name: Create and populate .Renviron file
+      - name: Create and populate .env file
         env:
           REACT_APP_GREETING: Hello
           REACT_APP_VERSION: v1.1.1
-          REACT_APP_RELEASE_VERSION: ${GITHUB_REF#refs/tags/*/} >> $GITHUB_ENV
+          REACT_APP_RELEASE_VERSION: ${GITHUB_REF#refs/*/} >> $GITHUB_ENV
         run: |
           touch .env
           echo $REACT_APP_GREETING >> .env
