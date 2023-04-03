@@ -20,7 +20,7 @@ export default function Home() {
   console.log("shortHash: " + gitInfo.commit.shortHash);
   return (
     <Container sx={{flex: 1, flexDirection: "column", justifyContent: "center"}}>
-      <Typography variant="h2">Home Page</Typography>
+      <Typography variant="h2">Home Page 2</Typography>
       <Typography variant="h2">
         {gitTagInfo.gitTag}
       </Typography>
