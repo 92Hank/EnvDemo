@@ -30,7 +30,7 @@ jobs:
         working-directory: env-demo
         run: |
           npm ci
-          npm run git-info
+          npm start & npx wait-on http://localhost
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
