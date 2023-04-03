@@ -15,8 +15,12 @@
     "@types/node": "^17.0.45",
     "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
+    "child_process": "^1.0.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-git-info": "^2.0.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
@@ -25,6 +29,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "git-info": "node src/gitInfo.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -36,6 +41,10 @@
       "react-app/jest"
     ]
   },
+  "browser": {
+    "child_process": false
+  },
+  "type": "module",
   "browserslist": {
     "production": [
       ">0.2%",

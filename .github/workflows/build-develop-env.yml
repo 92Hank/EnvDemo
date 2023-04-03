@@ -22,16 +22,37 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      
+      - run: npm git-info
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
 
-      - name: Create .env
-        run: echo "REACT_APP_TEST=test" > .env
+      - name: 'Create env file'
+        run: |
+          touch .env.test
+          echo REACT_APP_API_KEY=test >> .env.test
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Create and populate .env file
+        env:
+          REACT_APP_GREETING: Hello
+          REACT_APP_VERSION: v1.1.1
+          REACT_APP_RELEASE_VERSION: ${GITHUB_REF#refs/*/} >> $GITHUB_ENV
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          touch env-demo/.env
+          echo $REACT_APP_GREETING >> env-demo/.env
+          echo $REACT_APP_VERSION >> env-demo/.env
+          echo $REACT_APP_RELEASE_VERSION >> env-demo/.env
+
+          echo "cat env-demo/.env"
+          cat env-demo/.env
+
+          echo "ls -a ."
+          ls -a .
+
+          echo "ls -a ${{ github.workspace }}"
+          ls -a ${{ github.workspace }}
+        shell: bash
