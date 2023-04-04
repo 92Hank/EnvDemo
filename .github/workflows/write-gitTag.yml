@@ -31,5 +31,5 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const script = require('./src/gitTagInfo.js')
+            const script = require('./env-demo/src/gitTagInfo.js')
             console.log(script())
