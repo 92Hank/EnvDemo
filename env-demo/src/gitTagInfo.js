@@ -31,22 +31,22 @@ export default function printGitTag() {
     console.log(`Wrote the following contents to ${filePath}${fileContents}`);
 };
 
-const main = () => {
-    let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
-    let gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
-    // let gitTag = execSyncWrapper("git tag --sort=v:refname");
-    // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
+// const main = () => {
+//     let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
+//     let gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
+//     // let gitTag = execSyncWrapper("git tag --sort=v:refname");
+//     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
 
-    const obj = {
-        gitTag,
-        gitTagWithDate
-    };
+//     const obj = {
+//         gitTag,
+//         gitTagWithDate
+//     };
 
-    const filePath = path.resolve('src', 'gitTagVersion.json');
-    const fileContents = JSON.stringify(obj);
+//     const filePath = path.resolve('src', 'gitTagVersion.json');
+//     const fileContents = JSON.stringify(obj);
 
-    fs.writeFileSync(filePath, fileContents);
-    console.log(`Wrote the following contents to ${filePath}${fileContents}`);
-}
+//     fs.writeFileSync(filePath, fileContents);
+//     console.log(`Wrote the following contents to ${filePath}${fileContents}`);
+// }
 
-main();
+// main();
