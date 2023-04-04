@@ -19,13 +19,13 @@ export default async function printGitTag(github) {
     // let gitTag = execSyncWrapper("git tag --sort=v:refname");
     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
     let gitTag = null;
-    let gitTagWithDate = null;
-    gitTag = github.event.ref
-    gitTagWithDate = github.event.repository.updated_at
+    //let gitTagWithDate = null;
+    gitTag = github
+    //gitTagWithDate = github.event.repository.updated_at
 
     const obj = {
         gitTag,
-        gitTagWithDate
+        //gitTagWithDate
     };
 
     const filePath = path.resolve('env-demo/src', 'gitTagVersion.json');
