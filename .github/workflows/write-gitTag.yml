@@ -50,6 +50,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { default: printGitTag } = await import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
+            const { default: printGitTag } = import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
             
-            await printGitTag(${{env.tag}})
+            printGitTag(${{env.tag}})

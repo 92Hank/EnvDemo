@@ -1,19 +1,19 @@
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
+// import { execSync } from 'child_process';
 
 
-const execSyncWrapper = (command) => {
-    let output = null;
-    try {
-        output = execSync(command).toString().trim().split(/\r?\n/);
-    } catch (error) {
-        console.error(error);
-    }
-    return output;
-}
+// const execSyncWrapper = (command) => {
+//     let output = null;
+//     try {
+//         output = execSync(command).toString().trim().split(/\r?\n/);
+//     } catch (error) {
+//         console.error(error);
+//     }
+//     return output;
+// }
 
-export default async function printGitTag(github) {
+export default function printGitTag(github) {
     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
     // var gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
     // let gitTag = execSyncWrapper("git tag --sort=v:refname");
