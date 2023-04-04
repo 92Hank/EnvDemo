@@ -51,7 +51,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { default: printGitTag } = import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
+            const { default: printGitTag } = import(${{ github.workspace }}/env-demo/src/gitTagInfo.js)
             
             printGitTag(${{env.tag}})
             
