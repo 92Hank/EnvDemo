@@ -31,6 +31,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const script = import('../../../../../../EnvDemo/EnvDemo/env-demo/src/gitTagInfo.js')
+            const script = import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
             await script()
             console.log(script())
