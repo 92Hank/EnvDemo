@@ -19,14 +19,16 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: actions/github-script@v6
       - uses: actions/setup-node@v3
+        with:
+          node-version: "14.17.6"
 
       - name: Install dependencies
-        run: npm ci  
+        run: npm ci
+      
+      - name: Run git script
+        uses: actions/github-script@v6
         with:
-          cache: npm
-          node-version: "v14.17.6"
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const script = require('./src/gitTagInfo.js')
