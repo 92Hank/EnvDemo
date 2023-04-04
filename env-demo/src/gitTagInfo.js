@@ -20,10 +20,8 @@ export default async function printGitTag({ github, context, core }) {
     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
     let gitTag = null;
     let gitTagWithDate = null;
-    if (github.event.ref_type === "tag") {
-        gitTag = github.event.ref
-        gitTagWithDate = github.event.repository.updated_at
-    }
+    gitTag = github.event.ref
+    gitTagWithDate = github.event.repository.updated_at
 
     const obj = {
         gitTag,
