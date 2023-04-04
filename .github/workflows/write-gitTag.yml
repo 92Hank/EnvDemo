@@ -49,7 +49,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          working-directory: env-demo
           script: |
             const { default: printGitTag } = import('./env-demo/src/gitTagInfo.js')
             
