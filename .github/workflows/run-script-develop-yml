@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Create and populate json file
       - uses: actions/github-script@v6
         with:
           script: |
