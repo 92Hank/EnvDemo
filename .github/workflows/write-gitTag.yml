@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "tag=${{ steps.ghd.outputs.tag }}" >> $GITHUB_ENV
           echo "build_date=$(date +'%Y-%m-%d-%H:%M')" >> $GITHUB_ENV
-          echo "git_tag_date=$(git log -1 --format=%ai --date=short ${{ steps.ghd.outputs.tag }})" >> $GITHUB_ENV
+          echo "git_tag_date=$(git log -1 --format=%ai --date=short v1.0.3)" >> $GITHUB_ENV
       - name: Check output
         run: echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
       
