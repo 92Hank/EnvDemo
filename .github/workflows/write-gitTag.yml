@@ -46,7 +46,7 @@ jobs:
         run: echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
       
       - name: Run git script
-        uses: actions/github-script
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
