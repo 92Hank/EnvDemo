@@ -31,6 +31,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const script = import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
-            await script()
-            console.log(script())
+            const { default: printGitTag } = await import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
+
+            await printGitTag()
+            console.log(printGitTag())
