@@ -27,6 +27,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Git describe
+        id: ghd
+        uses: proudust/gh-describe@v1
+      - name: Check outputs
+        run: |
+          echo "describe: ${{ steps.ghd.outputs.describe }}"
+          echo "tag     : ${{ steps.ghd.outputs.tag }}"
+          echo "distance: ${{ steps.ghd.outputs.distance }}"
+          echo "sha     : ${{ steps.ghd.outputs.sha }}"
+
       - name: Set Git tag
         id: vars
         run: |
