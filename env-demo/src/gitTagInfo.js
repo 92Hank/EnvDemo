@@ -13,11 +13,17 @@ const execSyncWrapper = (command) => {
     return output;
 }
 
-export default function printGitTag() {
-    let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
-    var gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
+export default async function printGitTag({ github, context, core }) {
+    // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
+    // var gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
     // let gitTag = execSyncWrapper("git tag --sort=v:refname");
     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
+    let gitTag = null;
+    let gitTagWithDate = null;
+    if (github.event.ref_type === "tag") {
+        gitTag = github.event.ref
+        gitTagWithDate = github.event.repository.updated_at
+    }
 
     const obj = {
         gitTag,
