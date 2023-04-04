@@ -25,7 +25,9 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm run git-info
 
       - name: Git describe
         id: ghd
@@ -48,7 +50,6 @@ jobs:
       - name: Run git script
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { default: printGitTag } = import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
             const { default: printStuff } = await import('${{ github.workspace }}/env-demo/src/print-stuff.js')
