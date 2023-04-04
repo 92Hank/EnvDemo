@@ -48,7 +48,7 @@ jobs:
         run: |
           touch ${{ github.workspace }}/env-demo/src/.env
           echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
-          echo $REACT_APP_GIT_VERSION=${{env.tag}} - ${{git_tag_date}} >> ${{ github.workspace }}/env-demo/src/.env
+          echo $REACT_APP_GIT_VERSION=${{env.tag}} - ${{env.git_tag_date}} >> ${{ github.workspace }}/env-demo/src/.env
       
       - name: Run git script
         uses: actions/github-script@v6
