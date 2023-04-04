@@ -27,6 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
+          npm install child_process
           npm run git-info
           npm run build
 
