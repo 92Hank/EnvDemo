@@ -17,7 +17,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - uses: actions/github-script@v6
-      - name: Create and populate json file
         with:
           script: |
             const { default: printGitTag } = await import('${{ github.workspace }}/src/gitInfo.ts')
