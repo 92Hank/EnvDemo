@@ -45,10 +45,12 @@ jobs:
           echo "build_date=$(date +'%Y-%m-%d-%H:%M')" >> $GITHUB_ENV
           echo "git_tag_date=$(git log -1 --format=%ai --date=short)" >> $GITHUB_ENV
       - name: Check output
+        env:
+          REACT_APP_GIT_VERSION: ${{env.tag}} - ${{env.git_tag_date}} >> $GITHUB_ENV
         run: |
           touch ${{ github.workspace }}/env-demo/src/.env
           echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
-          echo $REACT_APP_GIT_VERSION=${{env.tag}} - ${{env.git_tag_date}} >> ${{ github.workspace }}/env-demo/src/.env
+          echo $REACT_APP_GIT_VERSION >> ${{ github.workspace }}/env-demo/src/.env
       
       - name: Run git script
         uses: actions/github-script@v6
