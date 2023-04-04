@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           echo "build_date=$(date +'%Y-%m-%d-%H:%M')" >> $GITHUB_ENV
-          echo "git_tag_date=$(git log -1 --format=%ai --date=short ${{env.tag}})"
+          echo "git_tag_date=$(git log -1 --format=%ai --date=short ${{env.tag}})" >> $GITHUB_ENV
       - name: Check output
         run: echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
       
