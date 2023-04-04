@@ -52,4 +52,4 @@ jobs:
           script: |
             const { default: printGitTag } = await import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
             
-            await printGitTag({github, context, core})
+            await printGitTag(${{env.tag}})

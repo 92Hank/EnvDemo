@@ -13,7 +13,7 @@ const execSyncWrapper = (command) => {
     return output;
 }
 
-export default async function printGitTag(github, context, core) {
+export default async function printGitTag(github) {
     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
     // var gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
     // let gitTag = execSyncWrapper("git tag --sort=v:refname");
