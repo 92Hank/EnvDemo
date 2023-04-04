@@ -25,12 +25,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
+          # node-version: 16
       
-      - name: run git-info
-        working-directory: env-demo
-        run: |
-          npm ci
-          npm start & npx wait-on http://localhost
+      # - name: run git-info
+      #  working-directory: env-demo
+      #  run: |
+      #    npm ci
+      #    npm run git-info
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
