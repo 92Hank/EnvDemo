@@ -28,6 +28,7 @@ jobs:
         run: |
           npm ci
           npm run git-info
+          npm run build
 
       - name: Git describe
         id: ghd
