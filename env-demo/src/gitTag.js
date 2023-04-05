@@ -14,7 +14,7 @@ const execSyncWrapper = (command) => {
 
 const main = () => {
     var gitTag = "Test";
-    let gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
+    let gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short`);
 
     const obj = {
         gitTag,
