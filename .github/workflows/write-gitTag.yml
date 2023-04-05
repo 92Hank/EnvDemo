@@ -81,14 +81,11 @@ jobs:
           name: env-demo-build
           path: env-demo/build/
 
-      - name: Git configuration
-        run: |
-          git config --local user.email "92Hank@users.noreply.github.com"
-          git config --local user.name "Henke"
-
       - name: Commit files
         id: commit
         run: |
+          git config --local user.email "92Hank@users.noreply.github.com"
+          git config --local user.name "Henke"
           git add --all
           if [-z "$(git status --porcelain)"]; then
             echo "::set-output name=push::false"
