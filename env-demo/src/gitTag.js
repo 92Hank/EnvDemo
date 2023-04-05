@@ -21,7 +21,7 @@ const main = () => {
         gitTagWithDate
     };
 
-    const filePath = path.resolve('env-demo/src', 'gitTagVersion.json');
+    const filePath = path.resolve('src', 'gitTagVersion.json');
     const fileContents = JSON.stringify(obj);
 
     fs.writeFileSync(filePath, fileContents);
