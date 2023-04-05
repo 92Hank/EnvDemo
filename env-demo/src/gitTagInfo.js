@@ -20,7 +20,7 @@ export default function printGitTag(github) {
     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
     let gitTag = null;
     //let gitTagWithDate = null;
-    gitTag = github ? github : "test"
+    gitTag = github ? github.toString() : "test"
     //gitTagWithDate = github.event.repository.updated_at
 
     const obj = {
