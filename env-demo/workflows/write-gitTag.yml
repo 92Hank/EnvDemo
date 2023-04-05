@@ -11,17 +11,6 @@ env:
 
 jobs:
   # This workflow contains a single job called "build"
-  build-env:
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: Create env file
-        run: |
-          touch .env
-          echo $REACT_APP_GIT_VERSION >> .env
-          cat .env
-
   create-envfile:
  
     runs-on: ubuntu-latest
