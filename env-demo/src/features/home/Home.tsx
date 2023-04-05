@@ -25,14 +25,18 @@ export default function Home() {
       ? gitTagInfo.gitTag + " - " + gitTagInfo.gitTagWithDate
       : gitTagInfo.gitTag;
   return (
-    <Container
-      sx={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
-    >
-      <Typography variant="h2">Home Page2</Typography>
+    <Container sx={{ flex: 1, justifyContent: "center" }}>
+      <Container
+        sx={{ flexDirection: "column", justifyContent: "space-between" }}
+      ></Container>
+      <Typography variant="h2">Home Page</Typography>
       <Typography variant="h4">
         {githubTag ? githubTag?.slice(0, -6) : "develop"}
       </Typography>
-      <Typography variant="h4">{gitInfo.branch}</Typography>
+      <Container sx={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <Typography variant="h4">{gitInfo.branch}</Typography>
+        <Typography variant="h4">{gitInfo.commit.hash}</Typography>
+      </Container>
     </Container>
   );
 }
