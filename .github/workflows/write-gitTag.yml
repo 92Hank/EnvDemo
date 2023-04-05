@@ -11,42 +11,12 @@ env:
 
 jobs:
   # This workflow contains a single job called "build"
-  build-env:
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: Create env file
-        run: |
-          touch .env
-          echo $REACT_APP_GIT_VERSION >> .env
-          cat .env
-
-  create-envfile:
- 
-    runs-on: ubuntu-latest
- 
-    steps:
-    - name: Make envfile
-      uses: SpicyPizza/create-envfile@v1.3
-      with:
-        envkey_DEBUG: false
-        envkey_SOME_API_KEY: "123456abcdef"
-        envkey_REACT_APP_GIT_VERSION: ${{ secrets.REACT_APP_GIT_VERSION }}
-        envkey_10_A_NUMBERED_KEY: "lorem"
-        envkey_3_ANOTHER_NUMBERED_KEY: "ipsum"
-        envkey_5_NUMBERED_KEY_VALUE_WITH_SPACES: "lorem ipsum"
-        envkey_1_ONE_MORE_NUMBERED_KEY: true
-        some_other_variable: foobar
-        file_name: .env
-        fail_on_empty: false
-
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: env-demo
+        working-directory: ./env-demo
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
