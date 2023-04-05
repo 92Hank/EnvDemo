@@ -57,19 +57,6 @@ jobs:
           node-version: 18
           cache: npm
 
-      - name: Git configuration
-        run: |
-          git config --global user.email
-          git config --global user.name
-
-      # Commit changes
-      - name: Get tag
-        run: |
-          git describe --tags
-          git log -1 --format=%ai --date=short
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Install dependencies
         run: |
           npm ci
