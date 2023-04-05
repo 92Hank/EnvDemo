@@ -13,9 +13,6 @@ jobs:
   # This workflow contains a single job called "build"
   build-env:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: env-demo
 
     steps:
 
