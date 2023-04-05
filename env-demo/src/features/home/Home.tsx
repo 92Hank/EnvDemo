@@ -2,7 +2,6 @@ import { Container, Typography } from "@mui/material";
 import GitInfo from "react-git-info/macro";
 import { execSyncWrapper } from "./test";
 import gitTagInfo from "../../gitTagInfo.json";
-import * as core from "@actions/core";
 
 export default function Home() {
   // let gitTag = "git tag --sort=v:refname | Select-Object -Last 1";
@@ -10,7 +9,6 @@ export default function Home() {
   let gitTag2 = execSyncWrapper(
     "git tag --sort=v:refname | Select-Object -Last 1"
   );
-  console.log(core);
   console.log(gitTag2);
   // const logResult = execSync(gitTag).toString();
   console.log("Git tag: " + gitTag2);
