@@ -23,7 +23,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }}
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0
+        # with:
+        #   ref: ${{ github.head_ref }}
 
       - uses: actions/setup-node@v3
         with:
@@ -85,32 +88,33 @@ jobs:
         run: echo ::set-output name=modified::$(if [ -n "$(git status --porcelain)" ]; then 
           echo "true"; else echo "false"; fi)
 
-      - name: Update changes in GitHub repository
-        if: steps.git-check.outputs.modified == 'true'
-        run:  |
-          git config --local user.name 'Henke' 
-          git config --local user.email 'henrik.g.kristensson@gmail.com'
-          git add -A
-          git commit -m '[automated commit] for git tags with GitHub workflow'
-          git push
+      # - name: Update changes in GitHub repository
+      #   if: steps.git-check.outputs.modified == 'true'
+      #   run:  |
+      #     git config --local user.name 'Henke' 
+      #     git config --local user.email 'henrik.g.kristensson@gmail.com'
+      #     git add -A
+      #     git commit -m '[automated commit] for git tags with GitHub workflow'
+      #     git push
 
-      # - name: Commit and push files
-      #   id: commit
-      #   run: |
-      #     git config --local user.email "henrik.g.kristensson@gmail.com"
-      #     git config --local user.name "Henke"
-      #     git add --all
-      #     if [-z "$(git status --porcelain)"]; then
-      #       echo "::set-output name=push::false"
-      #     else
-      #       git commit -m "Add changes" -a
-      #       git push
-      #       echo "::set-output name=push::true"
-      #     fi
+      - name: Commit and push files
+        id: commit
+        run: |
+          git config --local user.email "henrik.g.kristensson@gmail.com"
+          git config --local user.name "Henke"
+          git add --all
+          if [-z "$(git status --porcelain)"]; then
+            echo "::set-output name=push::false"
+          else
+            git commit -m "Add changes" -a
+            git push
+            echo "::set-output name=push::true"
+          fi
         shell: bash
-      # - name: Push changes
-      #   if: steps.commit.outputs.push == 'true'
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ secrets.MY_GITHUB_PAT }}
+      - name: Push changes
+        if: steps.commit.outputs.push == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
             
