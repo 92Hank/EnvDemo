@@ -81,11 +81,14 @@ jobs:
           name: env-demo-build
           path: env-demo/build/
 
+      - name: Git configuration
+        run: |
+          git config --global user.email "henrik.g.kristensson@gmail.com"
+          git config --global user.name "Henke"
+
       - name: Commit files
         id: commit
         run: |
-          git config --local user.email "henrik.g.kristensson@gmail.com"
-          git config --local user.name "Henke"
           git add --all
           if [-z "$(git status --porcelain)"]; then
             echo "::set-output name=push::false"
@@ -98,5 +101,5 @@ jobs:
         if: steps.commit.outputs.push == 'true'
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          github_token: ${{ secrets.token }}
             
