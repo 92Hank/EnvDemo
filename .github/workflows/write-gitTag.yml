@@ -87,6 +87,7 @@ jobs:
         id: git-check
         run: echo "modified=::$(if [ -n "$(git status --porcelain)" ]; then 
           echo "true"; else echo "false"; fi)" >> $GITHUB_OUTPUT
+        shell: bash
 
       # - name: Update changes in GitHub repository
       #   if: steps.git-check.outputs.modified == 'true'
