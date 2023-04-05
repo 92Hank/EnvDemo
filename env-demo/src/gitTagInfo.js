@@ -13,14 +13,14 @@ import path from 'path';
 //     return output;
 // }
 
-export default function printGitTag(github) {
+export default function printGitTag(tag) {
     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
     // var gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
     // let gitTag = execSyncWrapper("git tag --sort=v:refname");
     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
     let gitTag = null;
     //let gitTagWithDate = null;
-    gitTag = github ? github : "test"
+    gitTag = tag ? tag : "test"
     //gitTagWithDate = github.event.repository.updated_at
 
     const obj = {
