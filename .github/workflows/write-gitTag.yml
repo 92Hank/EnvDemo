@@ -124,12 +124,7 @@ jobs:
           git config --local user.email "henrik.g.kristensson@gmail.com"
           git config --local user.name "92Hank"
           git add --all
-          if [-n "$(git status --porcelain)"]; then
-            echo "push=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m '[automated commit] for git tags with GitHub workflow' -a
-            echo "push=true" >> $GITHUB_OUTPUT
-          fi
+          git commit -m '[automated commit] for git tags with GitHub workflow' -a
 
         shell: bash
       - name: Push changes
