@@ -58,7 +58,8 @@ jobs:
       - name: Create .env file
         uses: ozaytsev86/create-env-file@v1
         with:
-          REACT_APP_TAG_VERSION: ${{env.tag}}
+          ENV_REACT_APP_TAG_VERSION: ${{env.tag}}
+          ENV_REACT_APP_TAG_VERSION_DATE: ${{env.git_tag_date}}
           ENV_ANOTHER_KEY: 'Test123'
       
       - name: Run git script
@@ -113,8 +114,12 @@ jobs:
       #       echo "push=true" >> $GITHUB_OUTPUT
       #     fi
 
+      - name: Check for modified files
+        id: git-check
+        run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
+
       - name: Commit files
-        id: commit
+        if: steps.git-check.outputs.changed != 0
         run: |
           git config --local user.email "henrik.g.kristensson@gmail.com"
           git config --local user.name "92Hank"
@@ -128,7 +133,7 @@ jobs:
 
         shell: bash
       - name: Push changes
-        if: steps.commit.outputs.push == 'true'
+        if: steps.git-check.outputs.changed != 0
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
