@@ -81,7 +81,7 @@ jobs:
           name: env-demo-build
           path: env-demo/build/
 
-      - name: Commit files
+      - name: Commit and push files
         id: commit
         run: |
           git config --local user.email "92Hank@users.noreply.github.com"
