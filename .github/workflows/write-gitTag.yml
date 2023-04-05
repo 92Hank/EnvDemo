@@ -34,26 +34,46 @@ jobs:
           cache: npm
           cache-dependency-path: env-demo/package-lock.json
 
-      - name: Git describe
-        id: ghd
-        uses: proudust/gh-describe@v1.5.4
-      - name: Check outputs
-        run: |
-          echo "describe: ${{ steps.ghd.outputs.describe }}"
-          echo "tag     : ${{ steps.ghd.outputs.tag }}"
-          echo "distance: ${{ steps.ghd.outputs.distance }}"
-          echo "sha     : ${{ steps.ghd.outputs.sha }}"
+      # - name: Git describe
+      #   id: ghd
+      #   uses: proudust/gh-describe@v1.5.4
+      # - name: Check outputs
+      #   run: |
+      #     echo "describe: ${{ steps.ghd.outputs.describe }}"
+      #     echo "tag     : ${{ steps.ghd.outputs.tag }}"
+      #     echo "distance: ${{ steps.ghd.outputs.distance }}"
+      #     echo "sha     : ${{ steps.ghd.outputs.sha }}"
+
+      # - name: Set Git tag
+      #   run: |
+      #     echo "tag=${{ steps.ghd.outputs.tag }}" >> $GITHUB_ENV
+      #     echo "build_date=$(date +'%Y-%m-%d-%H:%M')" >> $GITHUB_ENV
+      #     echo "git_tag_date=$(git log -1 --format=%ai --date=short)" >> $GITHUB_ENV
+      # - name: Check output
+      #   run: |
+      #     touch ${{ github.workspace }}/env-demo/src/.env
+      #     echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
+      #     echo "REACT_APP_GIT_VERSION=${{env.tag}}" >> $GITHUB_ENV
 
       - name: Set Git tag
         run: |
-          echo "tag=${{ steps.ghd.outputs.tag }}" >> $GITHUB_ENV
-          echo "build_date=$(date +'%Y-%m-%d-%H:%M')" >> $GITHUB_ENV
+          echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
           echo "git_tag_date=$(git log -1 --format=%ai --date=short)" >> $GITHUB_ENV
       - name: Check output
         run: |
           touch ${{ github.workspace }}/env-demo/src/.env
           echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
           echo "REACT_APP_GIT_VERSION=${{env.tag}}" >> $GITHUB_ENV
+
+      - name: Make .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_REACT_APP_TAG_VERSION: ${{env.tag}}
+          envkey_ENV_REACT_APP_TAG_VERSION_DATE: ${{env.git_tag_date}}
+          ANOTHER_KEY: 'Test123'
+          directory: env-demo/src
+          file_name: .env
+          fail_on_empty: false
 
       - name: Create .env file
         uses: ozaytsev86/create-env-file@v1
