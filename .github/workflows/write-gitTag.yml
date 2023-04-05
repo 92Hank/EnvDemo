@@ -67,6 +67,8 @@ jobs:
         run: |
           git describe --tags --abbrev=0
           git log -1 --format=%ai --date=short
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
         run: |
