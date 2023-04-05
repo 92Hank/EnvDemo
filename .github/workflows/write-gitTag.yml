@@ -48,7 +48,7 @@ jobs:
         run: |
           touch ${{ github.workspace }}/env-demo/src/.env
           echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
-          echo "$REACT_APP_GIT_VERSION=${{env.tag}}"" >> $GITHUB_ENV
+          echo "REACT_APP_GIT_VERSION=${{env.tag}}"" >> $GITHUB_ENV
 
       - name: Create .env file
         uses: ozaytsev86/create-env-file@v1
@@ -62,7 +62,7 @@ jobs:
           script: |
             const { default: printGitTag } = await import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
             const { default: printStuff } = await import('${{ github.workspace }}/env-demo/src/print-stuff.js')
-            await printGitTag(${{ REACT_APP_GIT_VERSION }})
+            await printGitTag(${{ env.REACT_APP_GIT_VERSION }})
             await printStuff()
             console.log('stuff')
 
