@@ -60,7 +60,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { default: printStuff } = import('${{ github.workspace }}/env-demo/src/print-stuff.js')
+            const { printStuff } = import('${{ github.workspace }}/env-demo/src/print-stuff.js')
             printStuff()
             console.log('stuff')
 
