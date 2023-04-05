@@ -19,7 +19,7 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          echo $REACT_APP_GIT_VERSION >> .env
+          echo $REACT_APP_GIT_VERSION >> ${{ github.workspace }}/env-demo/src/.env
           cat .env
 
   create-envfile:
