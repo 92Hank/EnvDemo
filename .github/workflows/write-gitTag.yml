@@ -24,12 +24,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: npm
           cache-dependency-path: env-demo/package-lock.json
-
 
       - name: Git describe
         id: ghd
@@ -80,19 +80,33 @@ jobs:
           name: env-demo-build
           path: env-demo/build/
 
-      - name: Commit and push files
-        id: commit
-        run: |
-          git config --local user.email "henrik.g.kristensson@gmail.com"
-          git config --local user.name "Henke"
-          git add --all
-          if [-z "$(git status --porcelain)"]; then
-            echo "::set-output name=push::false"
-          else
-            git commit -m "Add changes" -a
-            git push
-            echo "::set-output name=push::true"
-          fi
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$(if [ -n "$(git status --porcelain)" ]; then 
+          echo "true"; else echo "false"; fi)
+
+      - name: Update changes in GitHub repository
+        if: steps.git-check.outputs.modified == 'true'
+        run:  |
+          git config --global user.name 'Henke' 
+          git config --global user.email 'henrik.g.kristensson@gmail.com'
+          git add -A
+          git commit -m '[automated commit] for git tags with GitHub workflow'
+          git push
+
+      # - name: Commit and push files
+      #   id: commit
+      #   run: |
+      #     git config --local user.email "henrik.g.kristensson@gmail.com"
+      #     git config --local user.name "Henke"
+      #     git add --all
+      #     if [-z "$(git status --porcelain)"]; then
+      #       echo "::set-output name=push::false"
+      #     else
+      #       git commit -m "Add changes" -a
+      #       git push
+      #       echo "::set-output name=push::true"
+      #     fi
         shell: bash
       # - name: Push changes
       #   if: steps.commit.outputs.push == 'true'
