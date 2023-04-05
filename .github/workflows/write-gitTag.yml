@@ -57,6 +57,17 @@ jobs:
           node-version: 18
           cache: npm
 
+      - name: Git configuration
+        run: |
+          git config --global user.email "henrik.g.kristensson@gmail.com"
+          git config --global user.name "Henke"
+
+      # Commit changes
+      - name: Commit CHANGELOG.md and package.json changes and create tag
+        run: |
+          git describe --tags --abbrev=0
+          git log -1 --format=%ai --date=short
+
       - name: Install dependencies
         run: |
           npm ci
