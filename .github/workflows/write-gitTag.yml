@@ -60,13 +60,13 @@ jobs:
           echo "git_tag_date=$(git log -1 --format=%ai --date=local ${{env.tag}})" >> $GITHUB_ENV
       - name: Check output
         run: |
-          touch ${{ github.workspace }}/env-demo/src/.env
+          touch ${{ github.workspace }}/env-demo/.env
           echo ${{env.tag}} - ${{env.git_tag_date}}
           echo "REACT_APP_GIT_VERSION=${{env.tag}}" >> $GITHUB_ENV
           echo "REACT_APP_TAG_VERSION=${{env.tag}}" >> ${{ github.workspace }}/env-demo/src/.env
           echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" >> ${{ github.workspace }}/env-demo/src/.env
           echo "TEST_ENV_KEY=hej123" >> ${{ github.workspace }}/env-demo/src/.env
-          cat ${{ github.workspace }}/env-demo/src/.env
+          cat ${{ github.workspace }}/env-demo/.env
 
       # - name: Make .env file
       #   uses: SpicyPizza/create-envfile@v1.3

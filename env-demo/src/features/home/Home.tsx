@@ -28,11 +28,18 @@ export default function Home() {
     <Container sx={{ flex: 1, justifyContent: "center" }}>
       <Container
         sx={{ flexDirection: "column", justifyContent: "space-between" }}
-      ></Container>
-      <Typography variant="h2">Home Page</Typography>
-      <Typography variant="h4">
-        {githubTag ? githubTag?.slice(0, -6) : "develop"}
-      </Typography>
+      >
+        <Typography variant="h2">Home Page</Typography>
+        <Typography variant="h4">
+          {githubTag ? githubTag?.slice(0, -6) : "develop"}
+        </Typography>
+        <Typography variant="h4">
+          {"From .env file: " +
+            process.env.REACT_APP_TAG_VERSION +
+            " " +
+            process.env.REACT_APP_TAG_VERSION_DATE}
+        </Typography>
+      </Container>
       <Container sx={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Typography variant="h4">{gitInfo.branch}</Typography>
         <Typography variant="h4">{gitInfo.commit.hash}</Typography>
