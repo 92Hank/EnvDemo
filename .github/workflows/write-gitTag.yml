@@ -101,7 +101,7 @@ jobs:
         id: commit
         run: |
           git config --local user.email "henrik.g.kristensson@gmail.com"
-          git config --local user.name "Henke"
+          git config --local user.name "92Hank"
           git add --all
           if [-z "$(git status --porcelain)"]; then
             echo "::set-output name=push::false"
