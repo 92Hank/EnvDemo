@@ -98,17 +98,13 @@ jobs:
       #     git push
 
       - name: Commit and push files
-        id: commit
+        if: steps.git-check.outputs.modified == 'true'
         run: |
           git config --local user.email "henrik.g.kristensson@gmail.com"
           git config --local user.name "92Hank"
           git add --all
-          if [-z "$(git status --porcelain)"]; then
-            echo "::set-output name=push::false"
-          else
-            git commit -m '[automated commit] for git tags with GitHub workflow' -a
-            echo "::set-output name=push::true"
-          fi
+          git commit -m '[automated commit] for git tags with GitHub workflow' -a
+
         shell: bash
       - name: Push changes
         if: steps.commit.outputs.push == 'true'
