@@ -13,7 +13,7 @@ const execSyncWrapper = (command) => {
 }
 
 const main = () => {
-    let gitTag = execSyncWrapper("git describe --always --tags --abbrev=0");
+    let gitTag = "Test";
     let gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
 
     const obj = {
