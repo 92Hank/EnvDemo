@@ -83,7 +83,7 @@ jobs:
 
       - name: Git configuration
         run: |
-          git config --local user.email "henrik.g.kristensson@gmail.com"
+          git config --local user.email "92Hank@users.noreply.github.com"
           git config --local user.name "Henke"
 
       - name: Commit files
@@ -94,12 +94,13 @@ jobs:
             echo "::set-output name=push::false"
           else
             git commit -m "Add changes" -a
+            git push
             echo "::set-output name=push::true"
           fi
         shell: bash
-      - name: Push changes
-        if: steps.commit.outputs.push == 'true'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.MY_GITHUB_PAT }}
+      # - name: Push changes
+      #   if: steps.commit.outputs.push == 'true'
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.MY_GITHUB_PAT }}
             
