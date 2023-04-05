@@ -3,6 +3,8 @@ name: Write to json
 on:
   pull_request:
     branches: [ "develop" ]
+  pull_request_target:
+    branches: [ "develop" ]
 
   workflow_dispatch:
 
