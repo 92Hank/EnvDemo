@@ -59,8 +59,8 @@ jobs:
 
       - name: Git configuration
         run: |
-          git config --global user.email "henrik.g.kristensson@gmail.com"
-          git config --global user.name "Henke"
+          git config --global user.email
+          git config --global user.name
 
       # Commit changes
       - name: Get tag
