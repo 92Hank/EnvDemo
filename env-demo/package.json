@@ -37,7 +37,7 @@
     "git-tag": "node src/gitTagInfo.js",
     "git-info": "ts-node src/gitInfo.ts",
     "start": "react-scripts start",
-    "build": "sh ./env.sh && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

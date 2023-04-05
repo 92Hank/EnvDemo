@@ -60,7 +60,9 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const { default: printGitTag } = await import('${{ github.workspace }}/env-demo/src/printTagInfo.js')
             const { default: printStuff } = await import('${{ github.workspace }}/env-demo/src/print-stuff.js')
+            await printGitTag(${{ github }})
             await printStuff()
             console.log('stuff')
 
