@@ -54,7 +54,7 @@ export default function printGitTag(github) {
 // }
 
 const main = () => {
-    let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
+    let gitTag = execSyncWrapper("git describe --always --tags --abbrev=0");
     let gitTagWithDate = execSyncWrapper(`git log -1 --format=%ai --date=short ${gitTag}`);
     // let gitTag = execSyncWrapper("git tag --sort=v:refname");
     // let gitTag = execSyncWrapper("git describe --tags --abbrev=0");
