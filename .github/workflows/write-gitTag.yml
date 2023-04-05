@@ -60,13 +60,15 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const { default: printStuff } = import('${{ github.workspace }}/env-demo/src/print-stuff.js')
+            printStuff()
             console.log('stuff')
 
       - name: Install dependencies
         run: |
           npm ci
           npm run build
-          
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
