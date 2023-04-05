@@ -28,11 +28,7 @@ export default function Home() {
     <Container
       sx={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
     >
-<<<<<<< Updated upstream
-      <Typography variant="h2">Home Page</Typography>
-=======
       <Typography variant="h2">Home Page!1</Typography>
->>>>>>> Stashed changes
       <Typography variant="h4">
         {githubTag ? githubTag?.slice(0, -6) : "develop"}
       </Typography>
