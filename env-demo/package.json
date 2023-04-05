@@ -32,7 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "git-tag": "node src/gitTagInfo.js",
+    "git-tag": "node src/gitTag.js",
     "git-info": "ts-node src/gitInfo.ts",
     "start": "react-scripts start",
     "build": "react-scripts build",
