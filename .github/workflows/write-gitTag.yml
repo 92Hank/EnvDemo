@@ -8,6 +8,20 @@ on:
 
 jobs:
   # This workflow contains a single job called "build"
+  build-env:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./env-demo
+
+    steps:
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo REACT_APP_GIT_VERSION=${{ secrets.REACT_APP_GIT_VERSION}} >> .env
+          cat .env
+
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -51,6 +65,12 @@ jobs:
           touch ${{ github.workspace }}/env-demo/src/.env
           echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
           echo $REACT_APP_GIT_VERSION=${{env.tag}} - ${{env.git_tag_date}} >> .env
+
+      - name: Create .env file
+        uses: ozaytsev86/create-env-file@v1
+        with:
+          ENV_TEST_API_KEY: ${{ secrets.TEST_API_KEY }}
+          ENV_ANOTHER_KEY: ${{ secrets.ANOTHER_KEY }}
       
       - name: Run git script
         uses: actions/github-script@v6

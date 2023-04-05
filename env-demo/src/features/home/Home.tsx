@@ -2,13 +2,27 @@ import { Container, Typography } from "@mui/material";
 import GitInfo from "react-git-info/macro";
 import { execSyncWrapper } from "./test";
 import gitTagInfo from "../../gitTagInfo.json";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   // let gitTag = "git tag --sort=v:refname | Select-Object -Last 1";
+  const [githubUser, setGithubUser] = useState("92Hank");
+  const [githubData, setGithubData] = useState([]);
+
+  const fetchData = () => {
+    return fetch(`https://api.github.com/users/${githubUser}`)
+      .then((response) => response.json())
+      .then((data) => setGithubData(data));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   let gitTag2 = execSyncWrapper(
     "git tag --sort=v:refname | Select-Object -Last 1"
   );
-    console.log(gitTag2);
+  console.log(gitTag2);
   // const logResult = execSync(gitTag).toString();
   console.log("Git tag: " + gitTag2);
   const gitInfo = GitInfo();
@@ -19,13 +33,19 @@ export default function Home() {
   console.log("Commit message: " + gitInfo.commit.message);
   console.log("shortHash: " + gitInfo.commit.shortHash);
 
-  const githubTag = process.env.NODE_ENV === "development" ? gitTagInfo.gitTag + " - " + gitTagInfo.gitTagWithDate : gitTagInfo.gitTag;
+  const githubTag =
+    process.env.NODE_ENV === "development"
+      ? gitTagInfo.gitTag + " - " + gitTagInfo.gitTagWithDate
+      : gitTagInfo.gitTag;
   return (
     <Container
       sx={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
     >
-      <Typography variant="h2">Home Page</Typography>
-      <Typography variant="h4">{githubTag ? githubTag?.slice(0, -6) : "develop"}</Typography>
+      <Typography variant="h2">Home Page1</Typography>
+      <Typography variant="h4">
+        {githubTag ? githubTag?.slice(0, -6) : "develop"}
+      </Typography>
+      <Typography variant="h4">{gitInfo.branch}</Typography>
     </Container>
   );
 }
