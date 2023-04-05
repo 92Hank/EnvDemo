@@ -83,11 +83,11 @@ jobs:
           name: env-demo-build
           path: env-demo/build/
 
-      - name: Check for modified files
-        id: git-check
-        run: echo "modified=::$(if [ -n "$(git status --porcelain)" ]; then 
-          echo "true"; else echo "false"; fi)" >> $GITHUB_OUTPUT
-        shell: bash
+      # - name: Check for modified files
+      #   id: git-check
+      #   run: echo "modified=::$(if [ -n "$(git status --porcelain)" ]; then 
+      #     echo "true"; else echo "false"; fi)" >> $GITHUB_OUTPUT
+      #   shell: bash
 
       # - name: Update changes in GitHub repository
       #   if: steps.git-check.outputs.modified == 'true'
@@ -98,17 +98,23 @@ jobs:
       #     git commit -m '[automated commit] for git tags with GitHub workflow'
       #     git push
 
-      - name: Commit and push files
-        if: steps.git-check.outputs.modified == 'true'
+      - name: Commit files
+        id: commit
         run: |
           git config --local user.email "henrik.g.kristensson@gmail.com"
           git config --local user.name "92Hank"
           git add --all
-          git commit -m '[automated commit] for git tags with GitHub workflow' -a
+          if [-z "$(git status --porcelain)"]; then
+            echo "push=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m '[automated commit] for git tags with GitHub workflow' -a
+            echo "::set-output name=push::true"
+            echo "push=true" >> $GITHUB_OUTPUT
+          fi
 
         shell: bash
       - name: Push changes
-        if: steps.git-check.outputs.modified == 'true'
+        if: steps.commit.outputs.push == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
