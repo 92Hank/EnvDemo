@@ -28,11 +28,6 @@ jobs:
           cache: npm
           cache-dependency-path: env-demo/package-lock.json
 
-      # - name: Install dependencies
-      #   run: |
-      #     npm ci
-      #     npm run git-info
-      #     npm run build
 
       - name: Git describe
         id: ghd
@@ -66,4 +61,15 @@ jobs:
         with:
           script: |
             console.log('stuff')
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm run build
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: env-demo-build
+          path: env-demo/build/
             
