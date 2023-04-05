@@ -60,8 +60,8 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { printStuff } = import('${{ github.workspace }}/env-demo/src/print-stuff.js')
-            printStuff()
+            const { printStuff } = await import('${{ github.workspace }}/env-demo/src/print-stuff.js')
+            await printStuff()
             console.log('stuff')
 
       - name: Install dependencies
