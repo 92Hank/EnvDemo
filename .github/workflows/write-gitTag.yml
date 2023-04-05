@@ -22,6 +22,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -78,28 +81,23 @@ jobs:
           name: env-demo-build
           path: env-demo/build/
 
-      - uses: actions/checkout@v3
-        name: second checkout
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-
-      # - name: Commit files
-      #   id: commit
-      #   run: |
-      #     git config --local user.email "henrik.g.kristensson@gmail.com"
-      #     git config --local user.name "Henke"
-      #     git add --all
-      #     if [-z "$(git status --porcelain)"]; then
-      #       echo "::set-output name=push::false"
-      #     else
-      #       git commit -m "Add changes" -a
-      #       echo "::set-output name=push::true"
-      #     fi
-      #   shell: bash
+      - name: Commit files
+        id: commit
+        run: |
+          git config --local user.email "henrik.g.kristensson@gmail.com"
+          git config --local user.name "Henke"
+          git add --all
+          if [-z "$(git status --porcelain)"]; then
+            echo "::set-output name=push::false"
+          else
+            git commit -m "Add changes" -a
+            echo "::set-output name=push::true"
+          fi
+        shell: bash
       - name: Push changes
         if: steps.commit.outputs.push == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
             
