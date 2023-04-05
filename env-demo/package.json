@@ -18,8 +18,6 @@
     "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
     "child_process": "^1.0.2",
-    "craco": "^0.0.3",
-    "craco-plugin-env": "^1.0.5",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "react": "^18.2.0",
@@ -37,7 +35,7 @@
   "scripts": {
     "git-tag": "node src/gitTagInfo.js",
     "git-info": "ts-node src/gitInfo.ts",
-    "start": "craco start",
+    "start": "react-scripts start",
     "build": "sh ./env.sh && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

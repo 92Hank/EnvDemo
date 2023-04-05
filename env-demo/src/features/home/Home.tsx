@@ -6,18 +6,6 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   // let gitTag = "git tag --sort=v:refname | Select-Object -Last 1";
-  const [githubUser, setGithubUser] = useState("92Hank");
-  const [githubData, setGithubData] = useState([]);
-
-  const fetchData = () => {
-    return fetch(`https://api.github.com/users/${githubUser}`)
-      .then((response) => response.json())
-      .then((data) => setGithubData(data));
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   let gitTag2 = execSyncWrapper(
     "git tag --sort=v:refname | Select-Object -Last 1"
