@@ -2,7 +2,6 @@ import { Container, Typography } from "@mui/material";
 import GitInfo from "react-git-info/macro";
 import { execSyncWrapper } from "./test";
 import gitTagInfo from "../../gitTagInfo.json";
-import { useEffect, useState } from "react";
 
 export default function Home() {
   // let gitTag = "git tag --sort=v:refname | Select-Object -Last 1";
