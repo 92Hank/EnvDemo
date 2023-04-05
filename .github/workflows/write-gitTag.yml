@@ -83,8 +83,8 @@ jobs:
 
       - name: Git configuration
         run: |
-          git config --global user.email "henrik.g.kristensson@gmail.com"
-          git config --global user.name "Henke"
+          git config --local user.email "henrik.g.kristensson@gmail.com"
+          git config --local user.name "Henke"
 
       - name: Commit files
         id: commit
