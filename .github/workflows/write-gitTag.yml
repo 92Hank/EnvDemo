@@ -61,25 +61,29 @@ jobs:
           echo "git_tag_date=$(git log -1 --format=%ai --date=short)" >> $GITHUB_ENV
       - name: Check output
         run: |
+          touch ${{ github.workspace }}/env-demo/src/.env
           echo ${{env.tag}} - ${{env.git_tag_date}}
           echo "REACT_APP_GIT_VERSION=${{env.tag}}" >> $GITHUB_ENV
+          echo "REACT_APP_TAG_VERSION=${{env.tag}}" >> ${{ github.workspace }}/env-demo/src/.env
+          echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" >> ${{ github.workspace }}/env-demo/src/.env
+          cat ${{ github.workspace }}/env-demo/src/.env
 
-      - name: Make .env file
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          envkey_REACT_APP_TAG_VERSION: ${{env.tag}}
-          envkey_ENV_REACT_APP_TAG_VERSION_DATE: ${{env.git_tag_date}}
-          ANOTHER_KEY: 'Test123'
-          directory: ${{ github.workspace }}/env-demo/src/.env
-          file_name: .env
-          fail_on_empty: false
+      # - name: Make .env file
+      #   uses: SpicyPizza/create-envfile@v1.3
+      #   with:
+      #     envkey_REACT_APP_TAG_VERSION: ${{env.tag}}
+      #     envkey_ENV_REACT_APP_TAG_VERSION_DATE: ${{env.git_tag_date}}
+      #     ANOTHER_KEY: 'Test123'
+      #     directory: ${{ github.workspace }}/env-demo/src/.env
+      #     file_name: .env
+      #     fail_on_empty: false
 
-      - name: Create .env file
-        uses: ozaytsev86/create-env-file@v1
-        with:
-          ENV_REACT_APP_TAG_VERSION: ${{env.tag}}
-          ENV_REACT_APP_TAG_VERSION_DATE: ${{env.git_tag_date}}
-          ENV_ANOTHER_KEY: 'Test123'
+      # - name: Create .env file
+      #   uses: ozaytsev86/create-env-file@v1
+      #   with:
+      #     ENV_REACT_APP_TAG_VERSION: ${{env.tag}}
+      #     ENV_REACT_APP_TAG_VERSION_DATE: ${{env.git_tag_date}}
+      #     ENV_ANOTHER_KEY: 'Test123'
       
       - name: Run git script
         uses: actions/github-script@v6
