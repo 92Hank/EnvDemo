@@ -28,7 +28,7 @@ export default function Home() {
     <Container
       sx={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
     >
-      <Typography variant="h2">Home Page12</Typography>
+      <Typography variant="h2">Home Page1</Typography>
       <Typography variant="h4">
         {githubTag ? githubTag?.slice(0, -6) : "develop"}
       </Typography>
