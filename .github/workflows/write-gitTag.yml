@@ -98,17 +98,31 @@ jobs:
       #     git commit -m '[automated commit] for git tags with GitHub workflow'
       #     git push
 
+      # - name: Commit files
+      #   id: commit
+      #   run: |
+      #     git config --local user.email "henrik.g.kristensson@gmail.com"
+      #     git config --local user.name "92Hank"
+      #     git add --all
+      #     if [-n "$(git status --porcelain)"]; then
+      #       echo "::set-output name=push::false"
+      #       echo "push=false" >> $GITHUB_OUTPUT
+      #     else
+      #       git commit -m '[automated commit] for git tags with GitHub workflow' -a
+      #       echo "::set-output name=push::true"
+      #       echo "push=true" >> $GITHUB_OUTPUT
+      #     fi
+
       - name: Commit files
         id: commit
         run: |
           git config --local user.email "henrik.g.kristensson@gmail.com"
           git config --local user.name "92Hank"
           git add --all
-          if [-z "$(git status --porcelain)"]; then
+          if [-n "$(git status --porcelain)"]; then
             echo "push=false" >> $GITHUB_OUTPUT
           else
             git commit -m '[automated commit] for git tags with GitHub workflow' -a
-            echo "::set-output name=push::true"
             echo "push=true" >> $GITHUB_OUTPUT
           fi
 
