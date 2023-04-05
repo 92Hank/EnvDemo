@@ -38,7 +38,6 @@ jobs:
         envkey_5_NUMBERED_KEY_VALUE_WITH_SPACES: "lorem ipsum"
         envkey_1_ONE_MORE_NUMBERED_KEY: true
         some_other_variable: foobar
-        directory: ${{ github.workspace }}/env-demo/src
         file_name: .env
         fail_on_empty: false
 
