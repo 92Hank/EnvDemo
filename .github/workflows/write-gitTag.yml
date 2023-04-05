@@ -65,7 +65,7 @@ jobs:
       # Commit changes
       - name: Get tag
         run: |
-          git describe --tags --abbrev=0
+          git describe --tags
           git log -1 --format=%ai --date=short
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
