@@ -33,15 +33,15 @@ jobs:
           cache: npm
           cache-dependency-path: env-demo/package-lock.json
 
-      # - name: Git describe
-      #   id: ghd
-      #   uses: proudust/gh-describe@v1.5.4
-      # - name: Check outputs
-      #   run: |
-      #     echo "describe: ${{ steps.ghd.outputs.describe }}"
-      #     echo "tag     : ${{ steps.ghd.outputs.tag }}"
-      #     echo "distance: ${{ steps.ghd.outputs.distance }}"
-      #     echo "sha     : ${{ steps.ghd.outputs.sha }}"
+      - name: Git describe
+        id: ghd
+        uses: proudust/gh-describe@v1.5.4
+      - name: Check outputs
+        run: |
+          echo "describe: ${{ steps.ghd.outputs.describe }}"
+          echo "tag     : ${{ steps.ghd.outputs.tag }}"
+          echo "distance: ${{ steps.ghd.outputs.distance }}"
+          echo "sha     : ${{ steps.ghd.outputs.sha }}"
 
       # - name: Set Git tag
       #   run: |
@@ -59,6 +59,7 @@ jobs:
           echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
           echo "git_tag_date=$(git log -1 --format=%ai --date=local ${{env.tag}})" >> $GITHUB_ENV
       - name: Check output
+        if: steps.ghd.outputs.tag != ${{env.tag}}
         run: |
           touch ${{ github.workspace }}/env-demo/.env
           echo ${{env.tag}} - ${{env.git_tag_date}}

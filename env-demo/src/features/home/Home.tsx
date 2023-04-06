@@ -24,6 +24,12 @@ export default function Home() {
     process.env.NODE_ENV === "development"
       ? gitTagInfo.gitTag + " - " + gitTagInfo.gitTagWithDate
       : gitTagInfo.gitTag;
+  const tagVersion =
+    process.env.NODE_ENV === "development"
+      ? process.env.REACT_APP_TAG_VERSION +
+        " " +
+        process.env.REACT_APP_TAG_VERSION_DATE
+      : process.env.REACT_APP_TAG_VERSION;
   return (
     <Container sx={{ flex: 1, justifyContent: "center" }}>
       <Container
@@ -34,10 +40,7 @@ export default function Home() {
           {githubTag ? githubTag?.slice(0, -6) : "develop"}
         </Typography>
         <Typography variant="h4">
-          {"From .env file: " +
-            process.env.REACT_APP_TAG_VERSION +
-            " " +
-            process.env.REACT_APP_TAG_VERSION_DATE}
+          From .env file: {tagVersion ? tagVersion?.slice(0, -6) : "develop"}
         </Typography>
       </Container>
       <Container sx={{ flexDirection: "row", justifyContent: "space-between" }}>
