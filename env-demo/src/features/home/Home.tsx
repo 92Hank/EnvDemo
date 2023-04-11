@@ -36,7 +36,7 @@ export default function Home() {
       <Container
         sx={{ flexDirection: "column", justifyContent: "space-between" }}
       >
-        <Typography variant="h2">Home Page</Typography>
+        <Typography variant="h2">Home Page!</Typography>
         <Typography variant="h3">Github tag version:</Typography>
         <Typography variant="h4">
           From json file: {githubTag ? githubTag?.slice(0, -6) : "develop"}
