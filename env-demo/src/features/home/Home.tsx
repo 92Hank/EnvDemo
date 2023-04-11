@@ -1,7 +1,8 @@
 import { Container, Typography } from "@mui/material";
 import GitInfo from "react-git-info/macro";
 import { execSyncWrapper } from "./test";
-import gitTagInfo from "../../gitTagVersion.json";
+import gitTagInfo from "../../tagVersion.json";
+import { format } from "date-fns";
 
 export default function Home() {
   // let gitTag = "git tag --sort=v:refname | Select-Object -Last 1";
@@ -22,7 +23,7 @@ export default function Home() {
 
   const githubTag =
     process.env.NODE_ENV === "development"
-      ? gitTagInfo.gitTag + " - " + gitTagInfo.gitTagWithDate
+      ? gitTagInfo.gitTag + " - " + format(new Date(), "yyyy-MM-dd")
       : gitTagInfo.gitTag;
   const tagVersion =
     process.env.NODE_ENV === "development"
