@@ -12,6 +12,10 @@ jobs:
           ref: ${{ github.ref }}
           fetch-depth: 0
 
+      - name: Set Git tag
+        run: |
+          echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+          echo "git_tag_date=$(git log -1 --format=%ai --date=local ${{env.tag}})" >> $GITHUB_ENV
       - name: Check output
         if: steps.ghd.outputs.tag != ${{env.tag}}
         run: |

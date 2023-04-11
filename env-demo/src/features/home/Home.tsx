@@ -1,7 +1,7 @@
 import { Container, Typography } from "@mui/material";
 import GitInfo from "react-git-info/macro";
 import { execSyncWrapper } from "./test";
-import gitTagInfo from "../../gitTagInfo.json";
+import gitTagInfo from "../../gitTagVersion.json";
 
 export default function Home() {
   // let gitTag = "git tag --sort=v:refname | Select-Object -Last 1";
@@ -38,7 +38,7 @@ export default function Home() {
         <Typography variant="h2">Home Page</Typography>
         <Typography variant="h3">Github tag version:</Typography>
         <Typography variant="h4">
-          {githubTag ? githubTag?.slice(0, -6) : "develop"}
+          From json file: {githubTag ? githubTag?.slice(0, -6) : "develop"}
         </Typography>
         <Typography variant="h4">
           From .env file: {tagVersion ? tagVersion?.slice(0, -6) : "develop"}
