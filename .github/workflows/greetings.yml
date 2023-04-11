@@ -17,6 +17,8 @@ jobs:
         run: |
           touch ${{ github.workspace }}/env-demo/.env.development
           echo "TEST_ENV_KEY=hej123" > ${{ github.workspace }}/env-demo/.env.development
+          echo "REACT_APP_TAG_VERSION=${{env.tag}}" > ${{ github.workspace }}/env-demo/.env.development
+          echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" > ${{ github.workspace }}/env-demo/.env.development
           cat ${{ github.workspace }}/env-demo/.env.development
 
       - name: Check for modified files
