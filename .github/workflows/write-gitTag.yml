@@ -24,8 +24,6 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
           ref: ${{ github.ref }}
           fetch-depth: 0
-        # with:
-        #   ref: ${{ github.head_ref }}
 
       - uses: actions/setup-node@v3
         with:
@@ -63,10 +61,9 @@ jobs:
         run: |
           touch ${{ github.workspace }}/env-demo/.env
           echo ${{env.tag}} - ${{env.git_tag_date}}
-          echo "REACT_APP_GIT_VERSION=${{env.tag}}" >> $GITHUB_ENV
-          echo "REACT_APP_TAG_VERSION=${{env.tag}}" >> ${{ github.workspace }}/env-demo/.env
-          echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" >> ${{ github.workspace }}/env-demo/.env
-          echo "TEST_ENV_KEY=hej123" >> ${{ github.workspace }}/env-demo/.env
+          echo "REACT_APP_TAG_VERSION=${{env.tag}}" > ${{ github.workspace }}/env-demo/.env
+          echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" > ${{ github.workspace }}/env-demo/.env
+          echo "TEST_ENV_KEY=hej123" > ${{ github.workspace }}/env-demo/.env
           cat ${{ github.workspace }}/env-demo/.env
 
       # - name: Make .env file
@@ -145,8 +142,8 @@ jobs:
       - name: Commit files
         if: steps.git-check.outputs.changed != 0
         run: |
-          git config --local user.email "henrik.g.kristensson@gmail.com"
-          git config --local user.name "92Hank"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add --all
           git commit -m '[automated commit] for git tags with GitHub workflow' -a
 
@@ -155,6 +152,5 @@ jobs:
         if: steps.git-check.outputs.changed != 0
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
             

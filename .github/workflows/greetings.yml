@@ -16,7 +16,7 @@ jobs:
         if: steps.ghd.outputs.tag != ${{env.tag}}
         run: |
           touch ${{ github.workspace }}/env-demo/.env.development
-          echo "TEST_ENV_KEY=hej123" >> ${{ github.workspace }}/env-demo/.env.development
+          echo "TEST_ENV_KEY=hej123" > ${{ github.workspace }}/env-demo/.env.development
           cat ${{ github.workspace }}/env-demo/.env.development
 
       - name: Check for modified files
