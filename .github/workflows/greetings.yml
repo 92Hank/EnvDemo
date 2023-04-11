@@ -17,13 +17,18 @@ jobs:
           echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
           echo "git_tag_date=$(git log -1 --format=%ai --date=local ${{env.tag}})" >> $GITHUB_ENV
       - name: Check output
-        if: steps.ghd.outputs.tag != ${{env.tag}}
         run: |
           touch ${{ github.workspace }}/env-demo/.env.development
           echo "TEST_ENV_KEY=hej123" >> ${{ github.workspace }}/env-demo/.env.development
           echo "REACT_APP_TAG_VERSION=${{env.tag}}" >> ${{ github.workspace }}/env-demo/.env.development
           echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" >> ${{ github.workspace }}/env-demo/.env.development
           cat ${{ github.workspace }}/env-demo/.env.development
+
+      - name: write json and check output
+        run: |
+          touch ${{ github.workspace }}/env-demo/src/tagVersion.json
+          echo "REACT_APP_TAG_VERSION=${{env.tag}}" > ${{ github.workspace }}/env-demo/src/tagVersion.json
+          cat ${{ github.workspace }}/env-demo/src/tagVersion.json
 
       - name: Check for modified files
         id: git-check
