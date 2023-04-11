@@ -31,12 +31,16 @@ jobs:
           echo '{"gitTag":["${{env.tag}}"]}' > ${{ github.workspace }}/env-demo/src/tagVersion.json
           cat ${{ github.workspace }}/env-demo/src/tagVersion.json
 
-      - name: Check for modified files
-        id: git-check
-        run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
+      # - name: Check for modified files
+      #   id: git-check
+      #   run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
+
+      - name: Check for uncommitted changes
+        id: check-changes
+        uses: mskri/check-uncommitted-changes-action@v1.0.1
 
       - name: Commit files
-        if: steps.git-check.outputs.changed != 0
+        if: steps.check-changes.outputs.changes != ''
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -45,7 +49,7 @@ jobs:
           git pull --rebase
           
       - name: Push changes
-        if: steps.git-check.outputs.changed != 0
+        if: steps.check-changes.outputs.changes != ''
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.ref }}
