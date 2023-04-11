@@ -27,7 +27,7 @@ jobs:
       - name: write json and check output
         run: |
           touch ${{ github.workspace }}/env-demo/src/tagVersion.json
-          echo "REACT_APP_TAG_VERSION=${{env.tag}}" > ${{ github.workspace }}/env-demo/src/tagVersion.json
+          echo "gitTag=${{env.tag}}" > ${{ github.workspace }}/env-demo/src/tagVersion.json
           cat ${{ github.workspace }}/env-demo/src/tagVersion.json
 
       - name: Check for modified files
