@@ -44,15 +44,15 @@ jobs:
         run: |
           echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
           echo "git_tag_date=$(git log -1 --format=%ai --date=local ${{env.tag}})" >> $GITHUB_ENV
-      - name: Check output
-        if: steps.ghd.outputs.tag != ${{env.tag}}
-        run: |
-          touch ${{ github.workspace }}/env-demo/.env
-          echo ${{env.tag}} - ${{env.git_tag_date}}
-          echo "REACT_APP_TAG_VERSION=${{env.tag}}" >> ${{ github.workspace }}/env-demo/.env
-          echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" >> ${{ github.workspace }}/env-demo/.env
-          echo "TEST_ENV_KEY=hej123" >> ${{ github.workspace }}/env-demo/.env
-          cat ${{ github.workspace }}/env-demo/.env
+      # - name: Check output
+      #   if: steps.ghd.outputs.tag != ${{env.tag}}
+      #   run: |
+      #     touch ${{ github.workspace }}/env-demo/.env
+      #     echo ${{env.tag}} - ${{env.git_tag_date}}
+      #     echo "REACT_APP_TAG_VERSION=${{env.tag}}" >> ${{ github.workspace }}/env-demo/.env
+      #     echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" >> ${{ github.workspace }}/env-demo/.env
+      #     echo "TEST_ENV_KEY=hej123" >> ${{ github.workspace }}/env-demo/.env
+      #     cat ${{ github.workspace }}/env-demo/.env
       
       # - name: Run git script
       #   uses: actions/github-script@v6
@@ -65,13 +65,13 @@ jobs:
       #       await printStuff()
       #       console.log('stuff')
 
-      - name: Run git script
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { default: printStuff } = await import('${{ github.workspace }}/env-demo/src/print-stuff.js')
-            console.log('${{env.tag}}')
-            await printStuff()
+      # - name: Run git script
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       const { default: printStuff } = await import('${{ github.workspace }}/env-demo/src/print-stuff.js')
+      #       console.log('${{env.tag}}')
+      #       await printStuff()
 
       - name: Install dependencies
         run: |
