@@ -41,17 +41,6 @@ jobs:
           echo "distance: ${{ steps.ghd.outputs.distance }}"
           echo "sha     : ${{ steps.ghd.outputs.sha }}"
 
-      # - name: Set Git tag
-      #   run: |
-      #     echo "tag=${{ steps.ghd.outputs.tag }}" >> $GITHUB_ENV
-      #     echo "build_date=$(date +'%Y-%m-%d-%H:%M')" >> $GITHUB_ENV
-      #     echo "git_tag_date=$(git log -1 --format=%ai --date=short)" >> $GITHUB_ENV
-      # - name: Check output
-      #   run: |
-      #     touch ${{ github.workspace }}/env-demo/src/.env
-      #     echo ${{env.tag}} - ${{env.build_date}} - ${{env.git_tag_date}}
-      #     echo "REACT_APP_GIT_VERSION=${{env.tag}}" >> $GITHUB_ENV
-
       - name: Set Git tag
         run: |
           echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
@@ -61,38 +50,29 @@ jobs:
         run: |
           touch ${{ github.workspace }}/env-demo/.env
           echo ${{env.tag}} - ${{env.git_tag_date}}
-          echo "REACT_APP_TAG_VERSION=${{env.tag}}" > ${{ github.workspace }}/env-demo/.env
-          echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" > ${{ github.workspace }}/env-demo/.env
-          echo "TEST_ENV_KEY=hej123" > ${{ github.workspace }}/env-demo/.env
+          echo "REACT_APP_TAG_VERSION=${{env.tag}}" >> ${{ github.workspace }}/env-demo/.env
+          echo "REACT_APP_TAG_VERSION_DATE=${{env.git_tag_date}}" >> ${{ github.workspace }}/env-demo/.env
+          echo "TEST_ENV_KEY=hej123" >> ${{ github.workspace }}/env-demo/.env
           cat ${{ github.workspace }}/env-demo/.env
-
-      # - name: Make .env file
-      #   uses: SpicyPizza/create-envfile@v1.3
-      #   with:
-      #     envkey_REACT_APP_TAG_VERSION: ${{env.tag}}
-      #     envkey_ENV_REACT_APP_TAG_VERSION_DATE: ${{env.git_tag_date}}
-      #     ANOTHER_KEY: 'Test123'
-      #     directory: ${{ github.workspace }}/env-demo/src/.env
-      #     file_name: .env
-      #     fail_on_empty: false
-
-      # - name: Create .env file
-      #   uses: ozaytsev86/create-env-file@v1
-      #   with:
-      #     ENV_REACT_APP_TAG_VERSION: ${{env.tag}}
-      #     ENV_REACT_APP_TAG_VERSION_DATE: ${{env.git_tag_date}}
-      #     ENV_ANOTHER_KEY: 'Test123'
       
+      # - name: Run git script
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       const { default: printGitTag } = await import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
+      #       const { default: printStuff } = await import('${{ github.workspace }}/env-demo/src/print-stuff.js')
+      #       console.log('${{env.tag}}')
+      #       await printGitTag('${{env.tag}}')
+      #       await printStuff()
+      #       console.log('stuff')
+
       - name: Run git script
         uses: actions/github-script@v6
         with:
           script: |
-            const { default: printGitTag } = await import('${{ github.workspace }}/env-demo/src/gitTagInfo.js')
             const { default: printStuff } = await import('${{ github.workspace }}/env-demo/src/print-stuff.js')
             console.log('${{env.tag}}')
-            await printGitTag('${{env.tag}}')
             await printStuff()
-            console.log('stuff')
 
       - name: Install dependencies
         run: |
