@@ -34,7 +34,7 @@ export default function Home() {
         <Typography variant="h2">Home Page!</Typography>
         <Typography variant="h3">Github tag version:</Typography>
         <Typography variant="h4">
-          From json file: {githubTag ? githubTag : "develop"}
+          From json file: {githubTag ?? "develop"}
         </Typography>
       </Container>
     </Container>
