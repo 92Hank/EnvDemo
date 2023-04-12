@@ -2,7 +2,8 @@ name: Push new tag
 
 on: 
   push:
-    tags: "*"
+    tags:
+      - "*"
 
 jobs:
   push-tag:
@@ -36,7 +37,6 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add --all
           git commit -m '[automated commit from greeting.yml] for git tags with GitHub workflow' -a
-          git pull --rebase
           
       - name: Push changes
         if: steps.git-check.outputs.changed != 0
