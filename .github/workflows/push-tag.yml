@@ -2,7 +2,8 @@ name: Push new tag
 
 on: 
   push:
-    branches: ["${{ github.ref }}"]
+    branches:
+      - ${{ github.ref }}
     tags:
       - "*"
 
