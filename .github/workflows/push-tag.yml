@@ -1,0 +1,45 @@
+name: Push new tag
+
+on: 
+  push:
+    tags: "*"
+
+jobs:
+  push-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+
+      - name: Set Git tag
+        run: |
+          echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+          echo "git_tag_date=$(git log -1 --format=%ai --date=local ${{env.tag}})" >> $GITHUB_ENV
+          echo "git_tag={"gitTag":[""${{env.tag}}""]}"
+
+      - name: write json and check output
+        run: |
+          touch ${{ github.workspace }}/env-demo/src/tagVersion.json
+          echo '{"gitTag":["${{env.tag}}"]}' > ${{ github.workspace }}/env-demo/src/tagVersion.json
+          cat ${{ github.workspace }}/env-demo/src/tagVersion.json
+
+      - name: Check for modified files
+        id: git-check
+        run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_OUTPUT
+
+      - name: Commit files
+        if: steps.git-check.outputs.changed != 0
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add --all
+          git commit -m '[automated commit from greeting.yml] for git tags with GitHub workflow' -a
+          git pull --rebase
+          
+      - name: Push changes
+        if: steps.git-check.outputs.changed != 0
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.ref }}
