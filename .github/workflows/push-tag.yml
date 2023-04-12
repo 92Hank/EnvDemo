@@ -3,7 +3,7 @@ name: Push new tag
 on: 
   push:
     branches:
-      - ${{ github.ref }}
+      - "develop"
     tags:
       - "*"
 
