@@ -43,9 +43,3 @@ jobs:
         with:
           force: true
           tags: true
-          
-      # - name: Push changes
-      #   if: steps.git-check.outputs.changed != 0
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     branch: ${{ github.ref }}
