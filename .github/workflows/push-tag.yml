@@ -33,8 +33,9 @@ jobs:
       - name: Set Git tag
         run: |
           echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-          echo "git_tag_date=$(git log -1 --format=%ai --date=local ${{env.tag}})" >> $GITHUB_ENV
-          echo "git_tag={"gitTag":[""${{env.tag}}""]}"
+
+      - name: Set tag date
+        run: echo "git_tag_date=$(git log -1 --format=%ai --date=short ${{env.tag}})" >> $GITHUB_ENV
 
       - name: write json and check output
         run: |
